@@ -22,22 +22,7 @@ const genDiff = (obj1, obj2) => {
     return { key, value: obj1[key], type: 'unchanged' };
   });
 
-  const strings = compareKeys.map((element) => {
-    if (element.type === 'added') {
-      return `+ ${element.key}: ${element.value}`;
-    } if (element.type === 'deleted') {
-      return `- ${element.key}: ${element.value}`;
-    } if (element.type === 'changed') {
-      return `- ${element.key}: ${element.value1}
-      + ${element.key}: ${element.value2}`;
-    }
-    return ` ${element.key}: ${element.value}`;
-  });
-
-  const result = strings.join('\n');
-  return `{
-    ${result}
-  }`;
+  return compareKeys;
 };
 
 export default genDiff;
