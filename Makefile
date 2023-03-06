@@ -11,4 +11,7 @@ lint:
 	npx eslint
 
 test:
-	npx jest --watch
+	npx jest
+
+test:
+	npx jest --coverage
