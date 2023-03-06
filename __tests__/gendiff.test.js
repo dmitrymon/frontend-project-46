@@ -11,6 +11,7 @@ test('fileJSON', () => {
   const filepath1 = getFixturePath('file1.json');
   const filepath2 = getFixturePath('file2.json');
   const resultpath = getFixturePath('expectedJSON.txt');
-  const result = fs.readFileSync(resultpath, 'utf-8');
+  const result = JSON.parse(fs.readFileSync(resultpath, 'utf-8'));
+
   expect(genDiff(filepath1, filepath2)).toBe(result);
 });
