@@ -16,3 +16,12 @@ test('fileJSON', () => {
 
   expect(genDiff(filepath1, filepath2)).toBe(result);
 });
+
+test('fileYAML', () => {
+  const filepath1 = getFixturePath('file1.yaml');
+  const filepath2 = getFixturePath('file2.yaml');
+  const resultpath = getFixturePath('expected.txt');
+  const result = fs.readFileSync(resultpath, 'utf-8');
+
+  expect(genDiff(filepath1, filepath2)).toBe(result);
+});
