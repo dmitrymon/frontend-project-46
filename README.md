@@ -11,4 +11,4 @@
 [![asciicast](https://asciinema.org/a/563355.svg)](https://asciinema.org/a/563355)
 
 #### gendiff yaml
-[![asciicast](https://asciinema.org/a/566729.svg)](https://asciinema.org/a/566729)
+[![asciicast](https://asciinema.org/a/566730.svg)](https://asciinema.org/a/566730)
