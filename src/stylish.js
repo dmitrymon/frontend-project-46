@@ -3,9 +3,9 @@ import _ from 'lodash';
 const symbolForNew = '+ ';
 const symbolForOld = '- ';
 const symbolForNeutral = '  ';
+const indentForSymbol = 2;
 
-const getLineIndent = (depth, space = ' ', spacesCount = 4, indentForSymbol = 2) => space.repeat(depth * spacesCount - indentForSymbol);
-const getBracketIndent = (depth, space = ' ', spacesCount = 4) => space.repeat(depth * spacesCount);
+const getIndent = (depth, type = 'line', space = ' ', spacesCount = 4) => type === 'bracket' ? space.repeat(depth * spacesCount) : space.repeat(depth * spacesCount - indentForSymbol);
 
 const stringify = (value, depth) => {
   if (!_.isPlainObject(value)) {
@@ -13,9 +13,9 @@ const stringify = (value, depth) => {
   }
   const lines = Object
     .entries(value)
-    .map(([key, val]) => `${getLineIndent(depth + 1)}  ${key}: ${stringify(val, depth + 1)}`);
+    .map(([key, val]) => `${getIndent(depth + 1)}  ${key}: ${stringify(val, depth + 1)}`);
 
-  const result = ['{', ...lines, `${getBracketIndent(depth)}}`].join('\n');
+  const result = ['{', ...lines, `${getIndent(depth, 'bracket')}}`].join('\n');
   return result;
 };
 
@@ -25,17 +25,17 @@ const makeStylish = (object) => {
       const { key, value, value1, value2, type } = node;
       switch (type) {
         case 'nested':
-          return `${getLineIndent(depth)}${symbolForNeutral}${key}: {\n${iter(value, depth + 1).join('\n')}\n${getBracketIndent(depth)}}`;
+          return `${getIndent(depth)}${symbolForNeutral}${key}: {\n${iter(value, depth + 1).join('\n')}\n${getIndent(depth, 'bracket')}}`;
         case 'added':
-          return `${getLineIndent(depth)}${symbolForNew}${key}: ${stringify(value, depth)}`;
+          return `${getIndent(depth)}${symbolForNew}${key}: ${stringify(value, depth)}`;
         case 'deleted':
-          return `${getLineIndent(depth)}${symbolForOld}${key}: ${stringify(value, depth)}`;
+          return `${getIndent(depth)}${symbolForOld}${key}: ${stringify(value, depth)}`;
         case 'changed':
-          const oldLine = `${getLineIndent(depth)}${symbolForOld}${key}: ${stringify(value1, depth)}`;
-          const newLine = `${getLineIndent(depth)}${symbolForNew}${key}: ${stringify(value2, depth)}`;
+          const oldLine = `${getIndent(depth)}${symbolForOld}${key}: ${stringify(value1, depth)}`;
+          const newLine = `${getIndent(depth)}${symbolForNew}${key}: ${stringify(value2, depth)}`;
           return `${oldLine}\n${newLine}`;
         case 'unchanged':
-          return `${getLineIndent(depth)}${symbolForNeutral}${key}: ${stringify(value, depth)}`;
+          return `${getIndent(depth)}${symbolForNeutral}${key}: ${stringify(value, depth)}`;
         default:
           throw new Error(`Unknown type: ${type}`);
       }
