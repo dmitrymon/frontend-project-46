@@ -1,9 +1,9 @@
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 import process from 'process';
 import parse from './parsers.js';
 import genDiff from './genDiff.js';
-import stylish from './stylish.js';
+import stylish from './formatters/stylish.js';
 
 const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 const getData = (filepath) => fs.readFileSync(getAbsolutePath(filepath), 'utf-8');
