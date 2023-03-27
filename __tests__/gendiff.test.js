@@ -14,13 +14,16 @@ const jsonFile2 = getFixturePath('file2.json');
 const yamlFile1 = getFixturePath('file1.yaml');
 const yamlFile2 = getFixturePath('file2.yaml');
 
-const resultpath = getFixturePath('expected.txt');
-const result = fs.readFileSync(resultpath, 'utf-8');
+const getExpected = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
+const expectedStylish = getExpected('expectedStylish.txt');
+const expectedPlain = getExpected('expectedPlain.txt');
 
 test.each([
-{ file1: jsonFile1, file2: jsonFile2, expected: result },
-{ file1: yamlFile1, file2: yamlFile2, expected: result },
-])('diff tests', (file1, file2, expected) => {
+{ file1: jsonFile1, file2: jsonFile2, formatName: 'stylish', expected: expectedStylish },
+{ file1: jsonFile1, file2: jsonFile2, formatName: 'plain', expected: expectedPlain },
+{ file1: yamlFile1, file2: yamlFile2, formatName: 'stylish', expected: expectedStylish },
+{ file1: yamlFile1, file2: yamlFile2, formatName: 'plain', expected: expectedPlain },
+])('diff tests', (file1, file2, formatName, expected) => {
 
-  expect(genDiff(file1, file2)).toBe(expected);
+  expect(genDiff(file1, file2, formatName)).toBe(expected);
 });
