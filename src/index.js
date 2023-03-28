@@ -1,17 +1,17 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 import process from 'process';
 import parse from './parsers.js';
 import genDiff from './genDiff.js';
-import stylish from './formatters/stylish.js';
+import format from './formatters/index.js';
 
 const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 const getData = (filepath) => fs.readFileSync(getAbsolutePath(filepath), 'utf-8');
 const getExtension = (filepath) => path.extname(filepath).slice(1);
 
-export default (filepath1, filepath2) => {
+export default (filepath1, filepath2, formatName = 'stylish') => {
   const obj1 = parse(getData(filepath1), getExtension(filepath1));
   const obj2 = parse(getData(filepath2), getExtension(filepath2));
   const differences = genDiff(obj1, obj2);
-  return stylish(differences);
+  return format(differences, formatName);
 };
