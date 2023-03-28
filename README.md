@@ -7,8 +7,11 @@
 
 [![example workflow](https://github.com/dmitrymon/frontend-project-46/actions/workflows/nodejs.yml/badge.svg)](https://github.com/dmitrymon/frontend-project-46/actions)
 
-#### gendiff json
-[![asciicast](https://asciinema.org/a/563355.svg)](https://asciinema.org/a/563355)
+#### gendiff stylish
+[![asciicast](https://asciinema.org/a/571525.svg)](https://asciinema.org/a/571525)
 
-#### gendiff yaml
-[![asciicast](https://asciinema.org/a/566730.svg)](https://asciinema.org/a/566730)
+#### gendiff plain
+[![asciicast](https://asciinema.org/a/571527.svg)](https://asciinema.org/a/571527)
+
+#### gendiff json
+[![asciicast](https://asciinema.org/a/571529.svg)](https://asciinema.org/a/571529)
