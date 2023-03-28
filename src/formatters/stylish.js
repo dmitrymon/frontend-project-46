@@ -21,7 +21,7 @@ const stringify = (value, depth) => {
 
 const makeStylish = (object) => {
   const iter = (tree, depth) => {
-    const result = tree.map ((node) => {
+    const result = tree.map((node) => {
       const { key, value, value1, value2, type } = node;
       switch (type) {
         case 'nested':
