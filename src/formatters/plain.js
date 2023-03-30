@@ -4,7 +4,7 @@ const stringify = (value) => {
   if (_.isObject(value)) {
     return '[complex value]';
   }
-  return _.isString(value) ? `'${value}'` : String(value);
+  return _.isString(value) ? String(value) : value;
 };
 
 const makePlain = (object) => {
