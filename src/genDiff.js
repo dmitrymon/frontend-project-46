@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const genDiff = (obj1, obj2) => {
   const keys1 = _.keys(obj1);
-  const keys2 = _.keys(obj2);  
+  const keys2 = _.keys(obj2);
   const sortedKeys = _.sortBy(_.union(keys1, keys2));
 
   const compareKeys = sortedKeys.map((key) => {

@@ -6,7 +6,7 @@ const symbolForNeutral = '  ';
 const indentForSymbol = 2;
 const spacesCount = 4;
 
-const getIndent = (depth, type = 'line', space = ' ') => type === 'bracket' ? space.repeat(depth * spacesCount) : space.repeat(depth * spacesCount - indentForSymbol);
+const getIndent = (depth, type = 'line', space = ' ') => (type === 'bracket' ? space.repeat(depth * spacesCount) : space.repeat(depth * spacesCount - indentForSymbol));
 
 const stringify = (value, depth) => {
   if (!_.isPlainObject(value)) {
@@ -23,7 +23,9 @@ const stringify = (value, depth) => {
 const makeStylish = (object) => {
   const iter = (tree, depth) => {
     const result = tree.map((node) => {
-      const { key, value, oldValue, newValue, type } = node;
+      const {
+        key, value, oldValue, newValue, type
+      } = node;
       switch (type) {
         case 'nested':
           return `${getIndent(depth)}${symbolForNeutral}${key}: {\n${iter(value, depth + 1).join('\n')}\n${getIndent(depth, 'bracket')}}`;
@@ -31,10 +33,11 @@ const makeStylish = (object) => {
           return `${getIndent(depth)}${symbolForNew}${key}: ${stringify(value, depth)}`;
         case 'deleted':
           return `${getIndent(depth)}${symbolForOld}${key}: ${stringify(value, depth)}`;
-        case 'changed':
+        case 'changed': {
           const oldLine = `${getIndent(depth)}${symbolForOld}${key}: ${stringify(oldValue, depth)}`;
           const newLine = `${getIndent(depth)}${symbolForNew}${key}: ${stringify(newValue, depth)}`;
           return `${oldLine}\n${newLine}`;
+        }
         case 'unchanged':
           return `${getIndent(depth)}${symbolForNeutral}${key}: ${stringify(value, depth)}`;
         default:
@@ -44,6 +47,6 @@ const makeStylish = (object) => {
     return result;
   };
   return iter(object, 1);
-}
+};
 
 export default (diff) => `{\n${makeStylish(diff).join('\n')}\n}`;
