@@ -12,7 +12,7 @@ const makePlain = (object) => {
     const filteredTree = tree.filter(({ type }) => type !== 'unchanged');
     const result = filteredTree.flatMap((node) => {
       const {
-        key, value, oldValue, newValue, type
+        key, value, oldValue, newValue, type,
       } = node;
       const currentPathElements = [...path, key];
       const currentPath = currentPathElements.join('.');
