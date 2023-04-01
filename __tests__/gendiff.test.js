@@ -20,13 +20,24 @@ const expectedPlain = getExpected('expectedPlain.txt');
 const expectedJSON = getExpected('expectedJSON.txt');
 
 test.each([
-{ file1: jsonFile1, file2: jsonFile2, formatName: 'stylish', expected: expectedStylish },
-{ file1: jsonFile1, file2: jsonFile2, formatName: 'plain', expected: expectedPlain },
-{ file1: jsonFile1, file2: jsonFile2, formatName: 'json', expected: expectedJSON },
-{ file1: yamlFile1, file2: yamlFile2, formatName: 'stylish', expected: expectedStylish },
-{ file1: yamlFile1, file2: yamlFile2, formatName: 'plain', expected: expectedPlain },
-{ file1: yamlFile1, file2: yamlFile2, formatName: 'json', expected: expectedJSON },
+  {
+    file1: jsonFile1, file2: jsonFile2, formatName: 'stylish', expected: expectedStylish
+  },
+  {
+    file1: jsonFile1, file2: jsonFile2, formatName: 'plain', expected: expectedPlain
+  },
+  {
+    file1: jsonFile1, file2: jsonFile2, formatName: 'json', expected: expectedJSON
+  },
+  {
+    file1: yamlFile1, file2: yamlFile2, formatName: 'stylish', expected: expectedStylish
+  },
+  {
+    file1: yamlFile1, file2: yamlFile2, formatName: 'plain', expected: expectedPlain
+  },
+  {
+    file1: yamlFile1, file2: yamlFile2, formatName: 'json', expected: expectedJSON
+  },
 ])('diff tests', ({ file1, file2, formatName, expected }) => {
-
   expect(genDiff(file1, file2, formatName)).toBe(expected);
 });
