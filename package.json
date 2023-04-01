@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/dmitrymon/frontend-project-46#readme",
   "dependencies": {
+    "@jest/globals": "^29.5.0",
     "commander": "^10.0.0",
     "fs": "^0.0.1-security",
     "js-yaml": "^4.1.0",
