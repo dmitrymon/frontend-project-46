@@ -4,7 +4,7 @@ const stringify = (value) => {
   if (_.isObject(value)) {
     return '[complex value]';
   }
-  return _.isString(value) ? String(value) : value;
+  return _.isString(value) ? `'${value}'` : value;
 };
 
 const makePlain = (object) => {
@@ -18,11 +18,11 @@ const makePlain = (object) => {
         case 'nested':
           return iter(value, currentPathElements);
         case 'added':
-          return `Property ${currentPath} was added with value: ${stringify(value)}`;
+          return `Property '${currentPath}' was added with value: ${stringify(value)}`;
         case 'deleted':
-          return `Property ${currentPath} was removed`;
+          return `Property '${currentPath}' was removed`;
         case 'changed':
-          return `Property ${currentPath} was updated. From ${stringify(oldValue)} to ${stringify(newValue)}`;
+          return `Property '${currentPath}' was updated. From ${stringify(oldValue)} to ${stringify(newValue)}`;
         default:
           throw new Error(`Unknown type: ${type}`);
         }
