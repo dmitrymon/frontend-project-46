@@ -2,9 +2,8 @@ import _ from 'lodash';
 
 const genDiff = (obj1, obj2) => {
   const keys1 = _.keys(obj1);
-  const keys2 = _.keys(obj2);
-  const allKeys = _.union(keys1, keys2);
-  const sortedKeys = _.sortBy(allKeys);
+  const keys2 = _.keys(obj2);  
+  const sortedKeys = _.sortBy(_.union(keys1, keys2));
 
   const compareKeys = sortedKeys.map((key) => {
     if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
@@ -16,8 +15,8 @@ const genDiff = (obj1, obj2) => {
     } if (obj1[key] !== obj2[key]) {
       return {
         key,
-        value1: obj1[key],
-        value2: obj2[key],
+        oldValue: obj1[key],
+        newValue: obj2[key],
         type: 'changed',
       };
     }

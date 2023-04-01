@@ -11,7 +11,7 @@ const makePlain = (object) => {
   const iter = (tree, path) => {
     const filteredTree = tree.filter(({ type }) => type !== 'unchanged');
     const result = filteredTree.flatMap((node) => {
-      const { key, value, value1, value2, type } = node;
+      const { key, value, oldValue, newValue, type } = node;
       const currentPathElements = [...path, key];
       const currentPath = currentPathElements.join('.');
       switch (type) {
@@ -22,7 +22,7 @@ const makePlain = (object) => {
         case 'deleted':
           return `Property ${currentPath} was removed`;
         case 'changed':
-          return `Property ${currentPath} was updated. From ${stringify(value1)} to ${stringify(value2)}`;
+          return `Property ${currentPath} was updated. From ${stringify(oldValue)} to ${stringify(newValue)}`;
         default:
           throw new Error(`Unknown type: ${type}`);
         }
