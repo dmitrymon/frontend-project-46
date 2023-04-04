@@ -7,7 +7,7 @@ const genDiff = (obj1, obj2) => {
 
   const compareKeys = sortedKeys.map((key) => {
     if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
-      return { key, value: genDiff(obj1[key], obj2[key]), type: 'nested' };
+      return { key, children: genDiff(obj1[key], obj2[key]), type: 'nested' };
     } if (!_.has(obj1, key)) {
       return { key, value: obj2[key], type: 'added' };
     } if (!_.has(obj2, key)) {

@@ -6,6 +6,6 @@ const parsers = {
   yml: yaml.load,
 };
 
-const parse = (data, extension) => parsers[extension](data);
+const parse = (data, format) => parsers[format](data);
 
 export default parse;

@@ -12,13 +12,13 @@ const makePlain = (object) => {
     const filteredTree = tree.filter(({ type }) => type !== 'unchanged');
     const result = filteredTree.flatMap((node) => {
       const {
-        key, value, oldValue, newValue, type,
+        key, children, value, oldValue, newValue, type,
       } = node;
       const currentPathElements = [...path, key];
       const currentPath = currentPathElements.join('.');
       switch (type) {
         case 'nested':
-          return iter(value, currentPathElements);
+          return iter(children, currentPathElements);
         case 'added':
           return `Property '${currentPath}' was added with value: ${stringify(value)}`;
         case 'deleted':

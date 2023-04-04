@@ -24,11 +24,11 @@ const makeStylish = (object) => {
   const iter = (tree, depth) => {
     const result = tree.map((node) => {
       const {
-        key, value, oldValue, newValue, type,
+        key, children, value, oldValue, newValue, type,
       } = node;
       switch (type) {
         case 'nested':
-          return `${getIndent(depth)}${symbolForNeutral}${key}: {\n${iter(value, depth + 1).join('\n')}\n${getIndent(depth, 'bracket')}}`;
+          return `${getIndent(depth)}${symbolForNeutral}${key}: {\n${iter(children, depth + 1).join('\n')}\n${getIndent(depth, 'bracket')}}`;
         case 'added':
           return `${getIndent(depth)}${symbolForNew}${key}: ${stringify(value, depth)}`;
         case 'deleted':
